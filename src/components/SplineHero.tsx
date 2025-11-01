@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
 // Lazy load Spline component to prevent blocking initial render
-const Spline = dynamic(() => import('@splinetool/react-spline'), {
+const Spline = dynamic(() => import('@splinetool/react-spline').then((mod) => mod.default), {
   ssr: false,
   loading: () => <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-background/80" />
 });
