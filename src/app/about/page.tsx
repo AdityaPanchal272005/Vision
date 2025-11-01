@@ -33,6 +33,7 @@ export default function AboutPage() {
                 width={600} 
                 height={800} 
                 alt="Portrait of Vrusabh Panchal, the photographer" 
+                loading="lazy"
                 className="rounded-lg shadow-lg object-cover w-full h-full" 
                 data-ai-hint="photographer portrait" 
             />

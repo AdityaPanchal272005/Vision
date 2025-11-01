@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { DatePicker } from "@/components/ui/date-picker";
+import { useState } from "react";
 
 const initialState: ContactFormState = {
   message: "",
@@ -39,6 +41,7 @@ export function ContactForm() {
   const [state, formAction] = useFormState(submitContactForm, initialState);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
+  const [preferredDate, setPreferredDate] = useState<Date | undefined>(undefined);
 
   useEffect(() => {
     if (state.status === 'success') {
@@ -47,6 +50,7 @@ export function ContactForm() {
         description: state.message,
       });
       formRef.current?.reset();
+      setPreferredDate(undefined);
     } else if (state.status === 'error') {
       toast({
         variant: "destructive",
@@ -90,7 +94,13 @@ export function ContactForm() {
       </div>
       <div className="space-y-2">
         <Label htmlFor="preferredDate">Preferred Date (Optional)</Label>
-        <Input id="preferredDate" name="preferredDate" type="date" className="block w-full" />
+        <DatePicker
+          id="preferredDate"
+          name="preferredDate"
+          value={preferredDate}
+          onChange={setPreferredDate}
+          placeholder="Select a date"
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="message">Your Message</Label>

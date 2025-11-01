@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Heart, Calendar, Users, ArrowRight } from 'lucide-react';
 import { portfolioImages } from '@/lib/data';
-import Spline from '@splinetool/react-spline';
+import { SplineHero } from '@/components/SplineHero';
 
 const services = [
   {
@@ -56,10 +56,7 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative h-screen min-h-[600px] w-full flex items-center justify-center text-center text-white overflow-hidden">
-        <Spline
-          scene="https://prod.spline.design/jbe4P1bCXGhYxXg7/scene.splinecode" 
-          className="absolute inset-0 z-0 opacity-100"
-        />
+        <SplineHero />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10"></div>
         <div className="relative z-20 container mx-auto px-4">
           <h1 className="font-headline text-5xl md:text-7xl font-bold tracking-tight text-shadow-lg">Capture Moments, Create Memories</h1>
@@ -83,7 +80,7 @@ export default function Home() {
           <h2 className="font-headline text-3xl md:text-4xl font-bold">Featured Work</h2>
           <p className="mt-2 text-muted-foreground max-w-xl mx-auto">A glimpse into the stories we've helped tell.</p>
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredWork.map((image) => (
+            {featuredWork.map((image, index) => (
               <Link href="/portfolio" key={image.id} className="group relative block overflow-hidden rounded-lg shadow-lg">
                 <Image
                   src={image.src}
@@ -91,6 +88,8 @@ export default function Home() {
                   width={image.width}
                   height={image.height}
                   data-ai-hint={image.hint}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  priority={index === 0}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300"></div>

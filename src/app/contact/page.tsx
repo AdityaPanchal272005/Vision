@@ -20,7 +20,7 @@ export default function ContactPage() {
             <div className="mt-8 space-y-4">
                 <div className="flex items-center gap-4">
                 <Mail className="h-6 w-6 text-primary shrink-0" />
-                <a href="adityapanchal272005@gmail.com" className="text-lg hover:text-primary transition-colors break-all">adityapanchal272005@gmail.com</a>
+                <a href="mailto:adityapanchal272005@gmail.com" className="text-lg hover:text-primary transition-colors break-all">adityapanchal272005@gmail.com</a>
                 </div>
                 <div className="flex items-center gap-4">
                 <Phone className="h-6 w-6 text-primary shrink-0" />
@@ -35,4 +35,29 @@ export default function ContactPage() {
       </div>
     </div>
   );
+}
+
+// filepath: d:\Vision\Vision-main\src\app\api\contact\route.ts
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+
+export async function POST(request: Request) {
+  const { name, email, message } = await request.json();
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "adityapanchal272005@gmail.com",
+      pass: "Ad@020705", // Use Gmail App Password
+    },
+  });
+
+  await transporter.sendMail({
+    from: email,
+    to: "adityapanchal272005@gmail.com",
+    subject: `New Contact Form Message from ${name}`,
+    text: message,
+  });
+
+  return NextResponse.json({ success: true });
 }

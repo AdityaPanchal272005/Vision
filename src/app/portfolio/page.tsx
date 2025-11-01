@@ -76,6 +76,10 @@ export default function PortfolioPage() {
               width={image.width}
               height={image.height}
               data-ai-hint={image.hint}
+              loading={index < 6 ? "eager" : "lazy"}
+              priority={index < 6}
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               className="rounded-lg shadow-lg hover:shadow-primary/50 transition-all duration-300 cursor-pointer w-full h-auto"
             />
              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 rounded-lg"></div>
@@ -92,6 +96,7 @@ export default function PortfolioPage() {
                 alt={selectedImage.alt}
                 width={selectedImage.width}
                 height={selectedImage.height}
+                priority
                 className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
                 data-ai-hint={selectedImage.hint}
               />
